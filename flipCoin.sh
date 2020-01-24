@@ -16,20 +16,18 @@ do
 		fi
 	done
 	coin[$key]=$((${coin[$key]}+1))
+	echo "$key : ${coin[$key]} "
 	key=""
-done
-echo ${coin[@]} 
-echo ${!coin[@]}
+done 
 Percentage
 }
 
 function Percentage() {
 for keys in ${!coin[@]}
 do
-	coin[$keys]=$(( ${coin[$keys]} * 100 / $flipCount ))
-done
-echo ${coin[@]} 
-echo ${!coin[@]}
+	coin[$keys]=$(( ${coin[$keys]} * 100 / $flipCount ))%
+	echo "Percentage of occurence of $keys : ${coin[$keys]} "
+done 
 }
 
 continue='Y'
