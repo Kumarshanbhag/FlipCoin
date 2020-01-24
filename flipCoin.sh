@@ -1,32 +1,55 @@
 #!/bin/bash 
 echo "Welcome To Flip Coin"
-declare -A coin
-heads=0
-tails=0
+key=""
 
 function FlipCoin() {
-coinToss=$1
-for((i=1; i<=$coinToss; i++))
+declare -A coin
+for((i=1; i<=$1; i++))
 do
-	if(($((RANDOM%2==0)) ))
-	then
-		coin[Toss$i]="Heads"
-		((heads++))
-	else
-		coin[Toss$i]="Tails"	
-		((tails++))
-	fi
+	for((j=1; j<=$2; j++))
+	do
+		if(( $((RANDOM%2==0)) ))
+		then
+			key+=H
+		else
+			key+=T
+		fi
+	done
+	coin[$key]=$((${coin[$key]}+1))
+	key=""
 done
+echo ${coin[@]} 
+echo ${!coin[@]}
+Percentage
 }
 
 function Percentage() {
-	echo "Number of times Heads Appeared : $heads"
-	echo "Percentage of Heads=$(($heads * 100 / $coinToss))"
-	echo "Number of times Tails Appeared : $tails"
-	echo "Percentage of Tails=$(($tails * 100 / $coinToss))"
+for keys in ${!coin[@]}
+do
+	coin[$keys]=$(( ${coin[$keys]} * 100 / $flipCount ))
+done
+echo ${coin[@]} 
+echo ${!coin[@]}
 }
 
-read -p "Enter number of times a coin needs to be tossed : " coinToss
-FlipCoin $coinToss
-Percentage coin
+continue='Y'
+while [[ $continue == "Y" || $continue == "y" ]]
+do
+	read -p "Enter number of times a coin needs to be tossed : " flipCount
+	read -p "Number of Coins Flipped : " coinCount
+	case $coinCount in
+		1)
+			FlipCoin $flipCount $coinCount
+			read -p "Do you want to contine (Y/N) : " continue
+		;;
+		2)
+			FlipCoin $flipCount $coinCount
+			read -p "Do you want to contine (Y/N) : " continue
+		;;
+		*)
+			echo "Option Not Available"
+			read -p "Do you want to contine (Y/N) : " continue
+		;;
+	esac
+done
 
