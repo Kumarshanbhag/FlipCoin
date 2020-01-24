@@ -44,6 +44,10 @@ do
 			FlipCoin $flipCount $coinCount
 			read -p "Do you want to contine (Y/N) : " continue
 		;;
+		3)
+			FlipCoin $flipCount $coinCount
+			read -p "Do you want to contine (Y/N) : " continue
+		;;
 		*)
 			echo "Option Not Available"
 			read -p "Do you want to contine (Y/N) : " continue
