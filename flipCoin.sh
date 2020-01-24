@@ -16,10 +16,9 @@ do
 		fi
 	done
 	coin[$key]=$((${coin[$key]}+1))
+	echo "$key : ${coin[$key]} "
 	key=""
 done
-echo ${coin[@]} 
-echo ${!coin[@]}
 Percentage
 }
 
@@ -27,9 +26,8 @@ function Percentage() {
 for keys in ${!coin[@]}
 do
 	coin[$keys]=$(( ${coin[$keys]} * 100 / $flipCount ))
+	echo "Percentage of occurence of $keys : ${coin[$keys]} "
 done
-echo ${coin[@]} 
-echo ${!coin[@]}
 }
 
 continue='Y'
@@ -43,6 +41,10 @@ do
 			read -p "Do you want to contine (Y/N) : " continue
 		;;
 		2)
+			FlipCoin $flipCount $coinCount
+			read -p "Do you want to contine (Y/N) : " continue
+		;;
+		3)
 			FlipCoin $flipCount $coinCount
 			read -p "Do you want to contine (Y/N) : " continue
 		;;
