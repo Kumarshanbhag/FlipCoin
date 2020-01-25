@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash -x
 echo "Welcome To Flip Coin"
 key=""
 
@@ -28,6 +28,15 @@ do
 	coin[$keys]=$(( ${coin[$keys]} * 100 / $flipCount ))%
 	echo "Percentage of occurence of $keys : ${coin[$keys]} "
 done 
+Sort
+}
+
+function Sort() {
+echo "Winning Occurence is "
+for i in ${!coin[@]}
+do
+	echo "$i : ${coin[$i]}"
+done | sort -k3 -nr | head -n 1
 }
 
 continue='Y'
@@ -38,20 +47,19 @@ do
 	case $coinCount in
 		1)
 			FlipCoin $flipCount $coinCount
-			read -p "Do you want to contine (Y/N) : " continue
+			read -p "Do you want to continue (Y/N) : " continue
 		;;
 		2)
 			FlipCoin $flipCount $coinCount
-			read -p "Do you want to contine (Y/N) : " continue
+			read -p "Do you want to continue (Y/N) : " continue
 		;;
 		3)
 			FlipCoin $flipCount $coinCount
-			read -p "Do you want to contine (Y/N) : " continue
+			read -p "Do you want to continue (Y/N) : " continue
 		;;
 		*)
 			echo "Option Not Available"
-			read -p "Do you want to contine (Y/N) : " continue
+			read -p "Do you want to continue (Y/N) : " continue
 		;;
 	esac
 done
-
